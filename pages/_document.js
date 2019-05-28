@@ -21,8 +21,8 @@ export default class extends Document {
 
   get helmetHeadComponents () {
     return Object.keys(this.props.helmet)
-        .filter(el => el !== 'htmlAttributes' && el !== 'bodyAttributes')
-        .map(el => this.props.helmet[el].toComponent())
+      .filter(el => el !== 'htmlAttributes' && el !== 'bodyAttributes')
+      .map(el => this.props.helmet[el].toComponent())
   }
 
   get helmetJsx () {
@@ -44,7 +44,7 @@ export default class extends Document {
           { this.helmetHeadComponents }
         </Head>
         <body {...this.helmetBodyAttrComponents}>
-          <style jsx global>{styles}</style>
+          <style>{styles}</style>
           <Main />
           <NextScript />
         </body>

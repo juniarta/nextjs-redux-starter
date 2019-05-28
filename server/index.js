@@ -1,7 +1,9 @@
 
+const path = require('path')
 const express = require('express')
 const compression = require('compression')
 const next = require('next')
+const helmet = require('helmet')
 
 const routes = require('../routes')
 
@@ -14,7 +16,15 @@ const handler = routes.getRequestHandler(app)
 app.prepare().then(() => {
   const server = express()
 
+  server.use(helmet())
   server.use(compression())
+
+  const staticPath = path.join(__dirname, '../static')
+  server.use('/static', express.static(staticPath, {
+    maxAge: '30d',
+    immutable: true
+  }))
+
   server.get('*', (req, res) => {
     return handler(req, res)
   })

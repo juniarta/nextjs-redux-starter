@@ -1,10 +1,11 @@
 const { ANALYZE, ASSET_HOST } = process.env
 
 // for those who using CDN
-const assetPrefix = ASSET_HOST || 'http://localhost:3100'
+const assetPrefix = ASSET_HOST || ''
 
 module.exports = {
   assetPrefix,
+  target: 'serverless',
   webpack: (config, { dev }) => {
     config.output.publicPath = `${assetPrefix}${config.output.publicPath}`
 
@@ -25,11 +26,11 @@ module.exports = {
           name: 'dist/[path][name].[ext]'
         }
       },
-        'babel-loader',
-        'styled-jsx-css-loader', {
-          loader: 'sass-loader',
-          options: { sourceMap: dev }
-        }]
+      'babel-loader',
+      'styled-jsx-css-loader', {
+        loader: 'sass-loader',
+        options: { sourceMap: dev }
+      }]
     })
 
     return config

@@ -1,19 +1,22 @@
 {
   "presets": [
-    "env",
     "next/babel"
   ],
   "plugins": [
+    "inline-dotenv",
     ["module-resolver", {
       "root": ["./src"]
     }]
   ],
   "env": {
-    "development": {
-      "plugins": ["inline-dotenv"]
-    },
-    "production": {
-      "plugins": ["transform-inline-environment-variables"]
+    "test": {
+      "presets": [
+        ["next/babel", {
+           "preset-env": {
+              "modules": "commonjs"
+            }
+        }]
+      ]
     }
   }
 }
